@@ -63,6 +63,8 @@ void swap_monsters(monster *list, int i, int j)
   memcpy(list + j, &temp, sizeof(monster));
 }
 
+int compare_monsters(monster *m1, monster *m2, int use_name, int use_weight);
+
 void check_monster_sort(monster *list, int n, int use_name, int use_weight)
 {
   for(int i = 1; i < n; i++) {

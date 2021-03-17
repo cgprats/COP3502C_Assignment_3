@@ -8,3 +8,5 @@ steps:
           commands:
                   - make
                   - out/as3.out
+                  - out/integer-sorts-template.out
+                  - out/monster-sorts-template.out
