@@ -150,6 +150,15 @@ void bubble_sort(monster *list, int n, int use_name, int use_weight)
 	start_cpu = clock();
 
 	// YOUR CODE GOES HERE.
+	for (i = 0; i < n - 1; i++) {
+		for (j = 0; j < n - i - 1; j++) {
+			comparisons++;
+			if (compare_monsters(&list[j], &list[j + 1], use_name, use_weight)) {
+				swaps++;
+				swap_monsters(list, j, j + 1);
+			}
+		}
+	}
 
 	end_cpu = clock();
 	printf("Sort complete with %d comparisons and %d swaps.\n", comparisons, swaps);
