@@ -82,7 +82,7 @@ int compare_monsters(monster *m1, monster *m2, int use_name, int use_weight)
 {
 	//Compare Name
 	if (use_name) {
-		if (strcmp(m1->name, m2->name)) {
+		if (strcmp(m1->name, m2->name) >= 0) {
 			return 1;
 		}
 		else {
@@ -91,7 +91,7 @@ int compare_monsters(monster *m1, monster *m2, int use_name, int use_weight)
 	}
 	//Compare Weight
 	else {
-		if (m1->weight > m2->weight) {
+		if (m1->weight >= m2->weight) {
 			return 1;
 		}
 		else {
