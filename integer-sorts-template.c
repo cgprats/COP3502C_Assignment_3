@@ -107,7 +107,7 @@ void bubble_sort(int *list, int n)
 {
   int i;
   int j;
-  int temp;
+  //int temp;
   int comparisons = 0;
   int swaps = 0;
   clock_t start_cpu, end_cpu;
@@ -192,11 +192,50 @@ void insertion_sort_internal(int *list, int n, int *comparisons, int *copies, in
 void merge_sort_merge(int *list, int l1, int h1, int l2, int h2, 
                       int *comparisons, int *copies, int *block_copies, int *mallocs)
 {
+	//Create Temporary Lists for Merge
+	int size1 = h1 - l1 + 1;
+	int size2 = h2 - l2 + 1;
+	int *list1 = malloc(sizeof(int) * size1);
+	int *list2 = malloc(sizeof(int) * size2);
+	*mallocs += 2;
+
+	//Copy Data into Temporary Lists
+	memcpy(list1, list + l1, size1);
+	memcpy(list2, list + l2, size2);
+	*block_copies += 2;
+	*copies += 2;
+
+	//Merge the Data into the Original Array
+	for (int i = 0, j = 0, k = 0; i < size1 && j < size2; k++) {
+		if (list1[i] <= list2[j]) {
+			list[k] = list1[i];
+			i++;
+		}
+		else {
+			list[k] = list2[j];
+			j++;
+		}
+	}
 }
 
 void merge_sort_recursive(int *list, int low_index, int high_index, 
                           int *comparisons, int *copies, int *block_copies, int *mallocs)
 {
+	printf("high index %d low index %d\n", high_index, low_index);
+	if (high_index > low_index) {
+		//Find the Halfway Point
+		int midpoint = (high_index + low_index) / 2;
+		printf("midpoint %d\n", midpoint);
+	
+		//Call Merge Sort for the First Half
+		merge_sort_recursive(list, low_index, midpoint, comparisons, copies, block_copies, mallocs);
+	
+		//Call Merge Sort for the Second Half
+		merge_sort_recursive(list, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs);
+	
+		//Merge the 2 Halves
+		merge_sort_merge(list, low_index, midpoint, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs);
+	}
 }
 
 void merge_insertion_sort_recursive(int *list, int low_index, int high_index, 
@@ -283,11 +322,12 @@ int *make_some_integers(int n)
 
 int main(void) {
   int n = 50000;
+  n = 10;
   int *our_list = make_some_integers(n);
   int *our_unsorted_list = malloc(sizeof(int) * n);
 
-//  output_integer_list(our_list, n, "unsorted values");
-
+  output_integer_list(our_list, n, "unsorted values");
+/*
   memcpy(our_unsorted_list, our_list, sizeof(int) * n);
   bubble_sort(our_unsorted_list, n);
 
@@ -299,14 +339,14 @@ int main(void) {
 
   memcpy(our_unsorted_list, our_list, sizeof(int) * n);
   insertion_sort(our_unsorted_list, n);
-
+*/
   memcpy(our_unsorted_list, our_list, sizeof(int) * n);
   merge_sort(our_unsorted_list, n);
-
+/*
   memcpy(our_unsorted_list, our_list, sizeof(int) * n);
   merge_insertion_sort(our_unsorted_list, n);
-
-//  output_integer_list(our_unsorted_list, n, "sorted values");
+*/
+  output_integer_list(our_unsorted_list, n, "sorted values");
 
   free(our_list);
   free(our_unsorted_list);
