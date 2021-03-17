@@ -1,0 +1,280 @@
+SORT SET: n = 50, all sorts, by weight
+
+Bubble sort 50 monsters by weight...
+Sort complete with 1225 comparisons and 523 swaps.
+  0.000077s CPU time used
+The list is sorted.
+
+Selection sort 50 monsters by weight...
+Sort complete with 1274 comparisons and 47 swaps.
+  0.000030s CPU time used
+The list is sorted.
+
+Insertion sort 50 monsters by weight...
+Sort complete with 746 comparisons and 44 block copies (1253 total copies).
+  0.000056s CPU time used
+The list is sorted.
+
+Quick sort 50 monsters by weight...
+Sort complete with 229 comparisons and 97 swaps.
+  0.000016s CPU time used
+The list is sorted.
+
+Merge sort 50 monsters...
+Sort complete with 221 comparisons, 98 block copies, 572 total copies, 49 mallocs.
+  0.000070s CPU time used
+The list is sorted.
+
+Merge-insertion sort 50 monsters...
+Sort complete with 398 comparisons, 43 block copies, 742 total copies, 1 mallocs.
+  0.000020s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
+SORT SET: n = 50, all sorts, by name
+
+Bubble sort 50 monsters by name...
+Sort complete with 1225 comparisons and 608 swaps.
+  0.000098s CPU time used
+The list is sorted.
+
+Selection sort 50 monsters by name...
+Sort complete with 1274 comparisons and 46 swaps.
+  0.000046s CPU time used
+The list is sorted.
+
+Insertion sort 50 monsters by name...
+Sort complete with 658 comparisons and 41 block copies (1143 total copies).
+  0.000029s CPU time used
+The list is sorted.
+
+Quick sort 50 monsters by name...
+Sort complete with 303 comparisons and 82 swaps.
+  0.000022s CPU time used
+The list is sorted.
+
+Merge sort 50 monsters...
+Sort complete with 216 comparisons, 98 block copies, 572 total copies, 49 mallocs.
+  0.000048s CPU time used
+The list is sorted.
+
+Merge-insertion sort 50 monsters...
+Sort complete with 351 comparisons, 41 block copies, 713 total copies, 1 mallocs.
+  0.000021s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
+SORT SET: n = 500, all sorts, by weight
+
+Bubble sort 500 monsters by weight...
+Sort complete with 124750 comparisons and 60639 swaps.
+  0.006494s CPU time used
+The list is sorted.
+
+Selection sort 500 monsters by weight...
+Sort complete with 125249 comparisons and 495 swaps.
+  0.001587s CPU time used
+The list is sorted.
+
+Insertion sort 500 monsters by weight...
+Sort complete with 64603 comparisons and 492 block copies (125042 total copies).
+  0.000949s CPU time used
+The list is sorted.
+
+Quick sort 500 monsters by weight...
+Sort complete with 5024 comparisons and 2564 swaps.
+  0.000323s CPU time used
+The list is sorted.
+
+Merge sort 500 monsters...
+Sort complete with 3861 comparisons, 998 block copies, 8976 total copies, 499 mallocs.
+  0.000378s CPU time used
+The list is sorted.
+
+Merge-insertion sort 500 monsters...
+Sort complete with 4611 comparisons, 463 block copies, 9133 total copies, 31 mallocs.
+  0.000233s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
+SORT SET: n = 500, all sorts, by name
+
+Bubble sort 500 monsters by name...
+Sort complete with 124750 comparisons and 62213 swaps.
+  0.009424s CPU time used
+The list is sorted.
+
+Selection sort 500 monsters by name...
+Sort complete with 125249 comparisons and 495 swaps.
+  0.004242s CPU time used
+The list is sorted.
+
+Insertion sort 500 monsters by name...
+Sort complete with 63024 comparisons and 487 block copies (124273 total copies).
+  0.002259s CPU time used
+The list is sorted.
+
+Quick sort 500 monsters by name...
+Sort complete with 4658 comparisons and 2384 swaps.
+  0.000391s CPU time used
+The list is sorted.
+
+Merge sort 500 monsters...
+Sort complete with 3849 comparisons, 998 block copies, 8976 total copies, 499 mallocs.
+  0.000478s CPU time used
+The list is sorted.
+
+Merge-insertion sort 500 monsters...
+Sort complete with 4603 comparisons, 459 block copies, 9100 total copies, 31 mallocs.
+  0.000341s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
+SORT SET: n = 5000, all sorts, by weight
+
+Bubble sort 5000 monsters by weight...
+Sort complete with 12497500 comparisons and 6236050 swaps.
+  0.670259s CPU time used
+The list is sorted.
+
+Selection sort 5000 monsters by weight...
+Sort complete with 12502499 comparisons and 4994 swaps.
+  0.166510s CPU time used
+The list is sorted.
+
+Insertion sort 5000 monsters by weight...
+Sort complete with 6266440 comparisons and 4990 block copies (12503418 total copies).
+  0.101287s CPU time used
+The list is sorted.
+
+Quick sort 5000 monsters by weight...
+Sort complete with 70184 comparisons and 34619 swaps.
+  0.004460s CPU time used
+The list is sorted.
+
+Merge sort 5000 monsters...
+Sort complete with 55260 comparisons, 9998 block copies, 123616 total copies, 4999 mallocs.
+  0.006112s CPU time used
+The list is sorted.
+
+Merge-insertion sort 5000 monsters...
+Sort complete with 66743 comparisons, 4615 block copies, 130606 total copies, 255 mallocs.
+  0.003925s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
+SORT SET: n = 5000, all sorts, by name
+
+Bubble sort 5000 monsters by name...
+Sort complete with 12497500 comparisons and 6261968 swaps.
+  0.905517s CPU time used
+The list is sorted.
+
+Selection sort 5000 monsters by name...
+Sort complete with 12502499 comparisons and 4986 swaps.
+  0.415122s CPU time used
+The list is sorted.
+
+Insertion sort 5000 monsters by name...
+Sort complete with 6240521 comparisons and 4989 block copies (12500133 total copies).
+  0.227113s CPU time used
+The list is sorted.
+
+Quick sort 5000 monsters by name...
+Sort complete with 67620 comparisons and 33329 swaps.
+  0.005186s CPU time used
+The list is sorted.
+
+Merge sort 5000 monsters...
+Sort complete with 55251 comparisons, 9998 block copies, 123616 total copies, 4999 mallocs.
+  0.006659s CPU time used
+The list is sorted.
+
+Merge-insertion sort 5000 monsters...
+Sort complete with 66666 comparisons, 4597 block copies, 130519 total copies, 255 mallocs.
+  0.004486s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
+SORT SET: n = 50000, fast sorts only, by weight
+
+Quick sort 50000 monsters by weight...
+Sort complete with 929307 comparisons and 439488 swaps.
+  0.059896s CPU time used
+The list is sorted.
+
+Merge sort 50000 monsters...
+Sort complete with 718325 comparisons, 99998 block copies, 1568928 total copies, 49999 mallocs.
+  0.078171s CPU time used
+The list is sorted.
+
+Merge-insertion sort 50000 monsters...
+Sort complete with 880810 comparisons, 46349 block copies, 1728155 total copies, 2047 mallocs.
+  0.049662s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
+SORT SET: n = 50000, fast sorts only, by name
+
+Quick sort 50000 monsters by name...
+Sort complete with 905003 comparisons and 459121 swaps.
+  0.075177s CPU time used
+The list is sorted.
+
+Merge sort 50000 monsters...
+Sort complete with 717938 comparisons, 99998 block copies, 1568928 total copies, 49999 mallocs.
+  0.079564s CPU time used
+The list is sorted.
+
+Merge-insertion sort 50000 monsters...
+Sort complete with 881791 comparisons, 46317 block copies, 1727414 total copies, 2047 mallocs.
+  0.062662s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
+SORT SET: n = 500000, fast sorts only, by weight
+
+Quick sort 500000 monsters by weight...
+Sort complete with 11307984 comparisons and 5816004 swaps.
+  0.722573s CPU time used
+The list is sorted.
+
+Merge sort 500000 monsters...
+Sort complete with 8836731 comparisons, 999998 block copies, 18951424 total copies, 499999 mallocs.
+  0.933181s CPU time used
+The list is sorted.
+
+Merge-insertion sort 500000 monsters...
+Sort complete with 9615479 comparisons, 455862 block copies, 18955572 total copies, 32767 mallocs.
+  0.759191s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
+SORT SET: n = 500000, fast sorts only, by name
+
+Quick sort 500000 monsters by name...
+Sort complete with 11321175 comparisons and 5597328 swaps.
+  0.867876s CPU time used
+The list is sorted.
+
+Merge sort 500000 monsters...
+Sort complete with 8837787 comparisons, 999998 block copies, 18951424 total copies, 499999 mallocs.
+  1.031811s CPU time used
+The list is sorted.
+
+Merge-insertion sort 500000 monsters...
+Sort complete with 9610466 comparisons, 456173 block copies, 18957396 total copies, 32767 mallocs.
+  0.873227s CPU time used
+The list is sorted.
+
+SORT SET COMPLETE
+
