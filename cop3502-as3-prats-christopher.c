@@ -413,6 +413,26 @@ void merge_insertion_sort_recursive(monster *list, int low_index, int high_index
 		int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	//Calculate n
+	int n = high_index - low_index;
+
+	//Perform Merge Sort When n is Greater than 25
+	if (n > 25) {
+		//Find the Halfway Point
+		int midpoint = (high_index + low_index) / 2;
+
+		//Recursively Call the Merge Sort on Both Halves of the Array
+		merge_insertion_sort_recursive(list, low_index, midpoint, comparisons, copies, block_copies, mallocs, use_name, use_weight);
+		merge_insertion_sort_recursive(list, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs, use_name, use_weight);
+
+		//Merge the 2 Halves
+		merge_sort_merge(list, low_index, midpoint, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs, use_name, use_weight);
+	}
+
+	//Perform Insertion Sort When n is Less than or Equal to 25
+	else {
+		insertion_sort_internal(list, n, comparisons, copies, block_copies, use_name, use_weight);
+	}
 }
 
 /* Implement merge sort. */
@@ -434,6 +454,14 @@ void merge_insertion_sort(monster *list, int n, int use_name, int use_weight)
 
 	printf("Sort complete with %d comparisons, %d block copies, %d total copies, %d mallocs.\n", comparisons, block_copies, copies, mallocs);
 	print_clocks(end_cpu - start_cpu);
+
+	//TODO: DELETE THIS
+	if (n == 50 && use_weight) {
+		for (int i = 0; i < n; i++) {
+			monster m = list[i];
+			printf("%f\n", m.weight);
+		}
+	}
 }
 
 /* Main program. */
