@@ -321,31 +321,6 @@ void merge_sort_merge(monster *list, int l1, int h1, int l2, int h2,
 	int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
-	int size1 = h1 - l1 + 1;
-	int size2 = h2 - l2 + 1;
-	monster *list1 = malloc(sizeof(monster) * size1);
-	monster *list2 = malloc(sizeof(monster) * size2);
-	*mallocs += 2;
-
-	memcpy(list1, list + l1, size1);
-	memcpy(list2, list + l2, size2);
-	*block_copies += 2;
-
-
-
-	for (int i = 0, j = 0, k = 0; i < size1 && j < size2; k++) {
-		(*comparisons)++;
-		if (compare_monsters(&list1[i], &list2[j], use_name, use_weight)) {
-			(*copies)++;
-			//memcpy(&list[k], &list1[i], sizeof(list1[i]));
-			list[k] = list1[i];
-		}
-		else {
-			(*copies)++;
-			//memcpy(&list[k], &list2[j], sizeof(list2[j]));
-			list[k] = list2[j];
-		}
-	}
 }
 
 /* Recursive function for merge sort. */
@@ -355,12 +330,6 @@ void merge_sort_recursive(monster *list, int low_index, int high_index,
 	int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
-	if (high_index > low_index) {
-		int midpoint = (high_index + low_index) / 2;
-		merge_sort_recursive(list, low_index, midpoint, comparisons, copies, block_copies, mallocs, use_name, use_weight);
-		merge_sort_recursive(list, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs, use_name, use_weight);
-		merge_sort_merge(list, low_index, midpoint, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs, use_name, use_weight);
-	}
 }
 
 /* Implement merge sort. */
