@@ -321,6 +321,47 @@ void merge_sort_merge(monster *list, int l1, int h1, int l2, int h2,
 	int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	//Find the Halves of Each Size
+	int size1 = h1 - l1 + 1;
+	int size2 = h2 - l2 + 1;
+
+	//Create the Two Temporary Sublists of Monsters
+	monster *list1 = calloc(size1, sizeof(monster));
+	monster *list2 = calloc(size2, sizeof(monster));
+	*mallocs += 2;
+
+	//Copy the Data into the Two Temporary Sublists
+	memcpy(&list1[0], &list[l1], sizeof(monster) * size1);
+	memcpy(&list2[0], &list[l2], sizeof(monster) * size2);
+	*block_copies += 2;
+
+	//Merge the Data into the Original Array
+	int i = 0, j = 0, k = l1;
+	for (; i < size1 && j < size2; k++, (*copies)++, (*comparisons)++) {
+		if (!compare_monsters(&list1[i], &list2[j], use_name, use_weight)) {
+			list[k] = list1[i];
+			i++;
+		}
+		else {
+			list[k] = list2[j];
+			j++;
+		}
+	}
+
+	//Add any Remaining Elements from List 1 into the Original Array
+	for (; i < size1; i++, k++, (*copies)++) {
+		list[k] = list1[i];
+	}
+
+	//Add any Remaining Elements from List 2 into the Original Array
+	for (; j < size2; j++, k++, (*copies)++) {
+		list[k] = list2[j];
+	}
+
+	//Free the Two Temporary Sublists
+	free(list1);
+	free(list2);
+
 }
 
 /* Recursive function for merge sort. */
@@ -330,6 +371,18 @@ void merge_sort_recursive(monster *list, int low_index, int high_index,
 	int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	//Ensure the Size of Each Array is at Least 1
+	if (high_index > low_index) {
+		//Find the Halfway Point
+		int midpoint = (high_index + low_index) / 2;
+
+		//Recursively Call the Merge Sort on Both Halves of the Array
+		merge_sort_recursive(list, low_index, midpoint, comparisons, copies, block_copies, mallocs, use_name, use_weight);
+		merge_sort_recursive(list, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs, use_name, use_weight);
+
+		//Merge the Two Sorted Halves
+		merge_sort_merge(list, low_index, midpoint, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs, use_name, use_weight);
+	}
 }
 
 /* Implement merge sort. */
