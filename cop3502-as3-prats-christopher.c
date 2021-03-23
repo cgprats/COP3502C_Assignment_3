@@ -56,24 +56,24 @@ void print_clocks(clock_t clocks) {
 
 void swap_monsters(monster *list, int i, int j)
 {
-  monster temp;
+	monster temp;
 
-  memcpy(&temp, list + i, sizeof(monster));
-  memcpy(list + i, list + j, sizeof(monster));
-  memcpy(list + j, &temp, sizeof(monster));
+	memcpy(&temp, list + i, sizeof(monster));
+	memcpy(list + i, list + j, sizeof(monster));
+	memcpy(list + j, &temp, sizeof(monster));
 }
 
 int compare_monsters(monster *m1, monster *m2, int use_name, int use_weight);
 
 void check_monster_sort(monster *list, int n, int use_name, int use_weight)
 {
-  for(int i = 1; i < n; i++) {
-    if(compare_monsters(list + i - 1, list + i, use_name, use_weight) > 0) {
-      printf("*** The list is NOT sorted.\n\n");
-      return;
-    }
-  }
-  printf("The list is sorted.\n\n");
+	for(int i = 1; i < n; i++) {
+		if(compare_monsters(list + i - 1, list + i, use_name, use_weight) > 0) {
+			printf("*** The list is NOT sorted.\n\n");
+			return;
+		}
+	}
+	printf("The list is sorted.\n\n");
 }
 
 /* The core comparison function. */
@@ -89,8 +89,9 @@ int compare_monsters(monster *m1, monster *m2, int use_name, int use_weight)
 			return 0;
 		}
 	}
+
 	//Compare Weight
-	else {
+	else if (use_weight) {
 		if (m1->weight >= m2->weight) {
 			return 1;
 		}
@@ -140,7 +141,6 @@ void bubble_sort(monster *list, int n, int use_name, int use_weight)
 {
 	int i;
 	int j;
-	int temp;
 	int comparisons = 0;
 	int swaps = 0;
 	clock_t start_cpu, end_cpu;
@@ -150,9 +150,12 @@ void bubble_sort(monster *list, int n, int use_name, int use_weight)
 	start_cpu = clock();
 
 	// YOUR CODE GOES HERE.
+	//Create Nested While Loops to Ensure Proper Comparison and Sorting
 	for (i = 0; i < n - 1; i++) {
 		for (j = 0; j < n - i - 1; j++) {
+			//Check if the Next Monster is Larger than the Current One
 			comparisons++;
+			//If the Previous Comment is True, Swap the Two Monsters
 			if (compare_monsters(&list[j], &list[j + 1], use_name, use_weight)) {
 				swaps++;
 				swap_monsters(list, j, j + 1);
@@ -170,14 +173,23 @@ void bubble_sort(monster *list, int n, int use_name, int use_weight)
 int find_highest(monster *list, int n, int *comparisons, int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	int highest_loc = 0;
+
+	for (int i = 0; i <= n; i++) {
+		(*comparisons)++;
+		if (compare_monsters(&list[i], &list[highest_loc], use_name, use_weight)) {
+			highest_loc = i;
+		}
+	}
+
+	return highest_loc;
 }
 
 /* Implement ascending selection sort. */
 
 void selection_sort(monster *list, int n, int use_name, int use_weight)
 {
-	int i;
-	int highest;
+	int highest = 0;
 	int comparisons = 0;
 	int swaps = 0;
 	clock_t start_cpu, end_cpu;
@@ -186,6 +198,16 @@ void selection_sort(monster *list, int n, int use_name, int use_weight)
 	start_cpu = clock();
 
 	// YOUR CODE GOES HERE.
+	//Traverse Through the Array
+	for (int i = n - 1; i > 0; i--) {
+		//Find the Highest Value in the Unsorted Portion of the List
+		highest = find_highest(list, i , &comparisons, use_name, use_weight);
+		//If the Current Position is Not the Largest, Swap the Largest Value from the Unsorted Sublist to the Sorted sublist
+		if (highest != i) {
+			swaps++;
+			swap_monsters(list, highest, i);
+		}
+	}
 
 	end_cpu = clock();
 	printf("Sort complete with %d comparisons and %d swaps.\n", comparisons, swaps);

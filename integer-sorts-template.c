@@ -330,10 +330,10 @@ int main(void) {
 /*
   memcpy(our_unsorted_list, our_list, sizeof(int) * n);
   bubble_sort(our_unsorted_list, n);
-
+*/
   memcpy(our_unsorted_list, our_list, sizeof(int) * n);
   selection_sort(our_unsorted_list, n);
-
+/*
   memcpy(our_unsorted_list, our_list, sizeof(int) * n);
   quick_sort(our_unsorted_list, n);
 
