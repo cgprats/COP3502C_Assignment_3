@@ -107,6 +107,21 @@ int repartition(monster *list, int low_index, int high_index, int *comparisons, 
 		int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	int i = low_index;
+	for (int j = low_index; j < high_index; j++) {
+		(*comparisons)++;
+		//If the Monster at j is Smaller than the Monster at high_index, Swap the Monsters at i and j
+		if (!compare_monsters(&list[j], &list[high_index], use_name, use_weight)) {
+			(*swaps)++;
+			swap_monsters(list, i, j);
+			i++;
+		}
+	}
+
+	//Swap the Monsters at i and high_index
+	(*swaps)++;
+	swap_monsters(list, i, high_index);
+	return i;
 }
 
 /* Recursive function for quick sort. */
@@ -115,6 +130,16 @@ void quick_sort_recursive(monster *list, int low_index, int high_index, int *com
 		int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	//Repartition to Find the New Pivot Index
+	int pivot_index = repartition(list, low_index, high_index, comparisons, swaps, use_name, use_weight);
+
+	//Recursively Call the Quick Sort Function with the Adjusted Low and High Indexes after a Repartition
+	if (pivot_index - 1 > low_index) {
+		quick_sort_recursive(list, low_index, pivot_index - 1, comparisons, swaps, use_name, use_weight);
+	}
+	if (high_index > pivot_index + 1) {
+		quick_sort_recursive(list, pivot_index + 1, high_index, comparisons, swaps, use_name, use_weight);
+	}
 }
 
 /* Shell function for quick sort. */
@@ -153,8 +178,10 @@ void bubble_sort(monster *list, int n, int use_name, int use_weight)
 	//Create Nested While Loops to Ensure Proper Comparison and Sorting
 	for (i = 0; i < n - 1; i++) {
 		for (j = 0; j < n - i - 1; j++) {
+
 			//Check if the Next Monster is Larger than the Current One
 			comparisons++;
+
 			//If the Previous Comment is True, Swap the Two Monsters
 			if (compare_monsters(&list[j], &list[j + 1], use_name, use_weight)) {
 				swaps++;
@@ -175,6 +202,7 @@ int find_highest(monster *list, int n, int *comparisons, int use_name, int use_w
 	// YOUR CODE GOES HERE.
 	int highest_loc = 0;
 
+	//Traverse Through the Array to Find the Largest Element
 	for (int i = 0; i <= n; i++) {
 		(*comparisons)++;
 		if (compare_monsters(&list[i], &list[highest_loc], use_name, use_weight)) {
@@ -200,8 +228,10 @@ void selection_sort(monster *list, int n, int use_name, int use_weight)
 	// YOUR CODE GOES HERE.
 	//Traverse Through the Array
 	for (int i = n - 1; i > 0; i--) {
+
 		//Find the Highest Value in the Unsorted Portion of the List
 		highest = find_highest(list, i , &comparisons, use_name, use_weight);
+
 		//If the Current Position is Not the Largest, Swap the Largest Value from the Unsorted Sublist to the Sorted sublist
 		if (highest != i) {
 			swaps++;
@@ -219,6 +249,22 @@ void selection_sort(monster *list, int n, int use_name, int use_weight)
 int insertion_sort_find_position(monster *list, int low_index, int high_index, monster *k, int *comparisons, int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	//Set the Sort Position to High_Index, if All Elements in Between the Two Indeces are Lower than k
+	int sort_position = high_index;
+
+	//Loop from Low to High Indexes
+	for (int i = low_index; i <= high_index; i++) {
+		(*comparisons)++;
+
+		//If the Monster at i is Greater than k, Set it to the Sort Position and Break out of Loop
+		if (compare_monsters(&list[i], k, use_name, use_weight)) {
+			sort_position = i;
+			break;
+		}
+	}
+
+	//Return the Sort Position
+	return sort_position;
 }
 
 /* Implement insertion sort. */
@@ -226,6 +272,26 @@ int insertion_sort_find_position(monster *list, int low_index, int high_index, m
 void insertion_sort_internal(monster *list, int n, int *comparisons, int *copies, int *block_copies, int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	int sort_position = 0;
+	monster temp;
+
+	for (int i = 1; i < n; i++) {
+		//Find the Position to Begin Sorting From
+		sort_position = insertion_sort_find_position(list, 0, i, &list[i], comparisons, use_name, use_weight);
+
+		//Only Move Elements if i is Not Equal to the Sort Position
+		if (i != sort_position) {
+			temp = list[i];
+
+			//Move Elements
+			memmove(&list[sort_position + 1], &list[sort_position], (i - sort_position) * sizeof(monster));
+			*block_copies += (i - sort_position);
+			(*copies)++;
+
+			//Set the Element at the Sort Position Equal to i
+			list[sort_position] = temp;
+		}
+	}
 }
 
 /* Shell for insertion sort. */
@@ -251,19 +317,50 @@ void insertion_sort(monster *list, int n, int use_name, int use_weight)
    Must have l2 = l1 + 1 or bad things will happen. */
 
 void merge_sort_merge(monster *list, int l1, int h1, int l2, int h2, 
-		int *comparisons, int *copies, int *block_copies, int *mallocs,
-		int use_name, int use_weight)
+	int *comparisons, int *copies, int *block_copies, int *mallocs,
+	int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	int size1 = h1 - l1 + 1;
+	int size2 = h2 - l2 + 1;
+	monster *list1 = malloc(sizeof(monster) * size1);
+	monster *list2 = malloc(sizeof(monster) * size2);
+	*mallocs += 2;
+
+	memcpy(list1, list + l1, size1);
+	memcpy(list2, list + l2, size2);
+	*block_copies += 2;
+
+
+
+	for (int i = 0, j = 0, k = 0; i < size1 && j < size2; k++) {
+		(*comparisons)++;
+		if (compare_monsters(&list1[i], &list2[j], use_name, use_weight)) {
+			(*copies)++;
+			//memcpy(&list[k], &list1[i], sizeof(list1[i]));
+			list[k] = list1[i];
+		}
+		else {
+			(*copies)++;
+			//memcpy(&list[k], &list2[j], sizeof(list2[j]));
+			list[k] = list2[j];
+		}
+	}
 }
 
 /* Recursive function for merge sort. */
 
 void merge_sort_recursive(monster *list, int low_index, int high_index, 
-		int *comparisons, int *copies, int *block_copies, int *mallocs,
-		int use_name, int use_weight)
+	int *comparisons, int *copies, int *block_copies, int *mallocs,
+	int use_name, int use_weight)
 {
 	// YOUR CODE GOES HERE.
+	if (high_index > low_index) {
+		int midpoint = (high_index + low_index) / 2;
+		merge_sort_recursive(list, low_index, midpoint, comparisons, copies, block_copies, mallocs, use_name, use_weight);
+		merge_sort_recursive(list, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs, use_name, use_weight);
+		merge_sort_merge(list, low_index, midpoint, midpoint + 1, high_index, comparisons, copies, block_copies, mallocs, use_name, use_weight);
+	}
 }
 
 /* Implement merge sort. */
